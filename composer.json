@@ -1,0 +1,22 @@
+{
+    "name": "ordergroove/subscription",
+    "description": "N/A",
+    "version": "1.3.6",
+    "require": {
+        "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0",
+        "paypal/module-braintree": "^4.1.0-p1"
+    },
+    "type": "magento2-module",
+    "license": [
+        "BSD-3-Clause"
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ordergroove\\Subscription\\": ""
+        }
+    }
+}
