@@ -160,7 +160,65 @@ class OgAuthCookie
             ->setPath($this->sessionManager->getCookiePath())
             ->setDomain($this->sessionManager->getCookieDomain());
 
-        $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
+        // $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
+        $expire = $this->computeExpirationTime($metadataArray);
+
+        $phpSetcookieSuccess = setrawcookie(
+            $name,
+            $value,
+            [
+                'expires' => $expire,
+                'path' => $this->extractValue('path', $metadataArray, ''),
+                'domain' => $this->extractValue('domain', $metadataArray, ''),
+                'secure' => true,
+                'httponly' => false,
+                'samesite' => $this->extractValue('samesite', $metadataArray, 'Lax')
+            ]
+        );
+    }
+
+    /**
+     * Determines the expiration time of a cookie.
+     * (Copied from core magento module)
+     *
+     * @param array $metadataArray
+     * @return int in seconds since the Unix epoch.
+     */
+    private function computeExpirationTime(array $metadataArray)
+    {
+        if (isset($metadataArray['expiry'])
+            && $metadataArray['expiry'] < time()
+        ) {
+            $expireTime = $metadataArray['expiry'];
+        } else {
+            if (isset($metadataArray['duration'])) {
+                $expireTime = $metadataArray['duration'] + time();
+            } else {
+                $expireTime = 0;
+            }
+        }
+
+        return $expireTime;
+    }
+
+    /**
+     * Determines the value to be used as a $parameter.
+     * (Copied from core magento module)
+     *
+     * If $metadataArray[$parameter] is not set, returns the $defaultValue.
+     *
+     * @param string $parameter
+     * @param array $metadataArray
+     * @param string|boolean|int|null $defaultValue
+     * @return string|boolean|int|null
+     */
+    private function extractValue($parameter, array $metadataArray, $defaultValue)
+    {
+        if (array_key_exists($parameter, $metadataArray)) {
+            return $metadataArray[$parameter];
+        } else {
+            return $defaultValue;
+        }
     }
 
 
