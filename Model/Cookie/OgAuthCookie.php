@@ -158,7 +158,8 @@ class OgAuthCookie
             ->createPublicCookieMetadata()
             ->setDuration($duration)
             ->setPath($this->sessionManager->getCookiePath())
-            ->setDomain($this->sessionManager->getCookieDomain());
+            ->setDomain($this->sessionManager->getCookieDomain())
+            ->__toArray();
 
         $expire = $this->computeExpirationTime($metadataArray);
 
