@@ -154,13 +154,12 @@ class OgAuthCookie
      */
     public function set($value, $duration = 7200)
     {
-        $metadata = $this->cookieMetadataFactory
+        $metadataArray = $this->cookieMetadataFactory
             ->createPublicCookieMetadata()
             ->setDuration($duration)
             ->setPath($this->sessionManager->getCookiePath())
             ->setDomain($this->sessionManager->getCookieDomain());
 
-        // $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
         $expire = $this->computeExpirationTime($metadataArray);
 
         $phpSetcookieSuccess = setrawcookie(
