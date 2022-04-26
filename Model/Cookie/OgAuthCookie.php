@@ -164,7 +164,7 @@ class OgAuthCookie
         $expire = $this->computeExpirationTime($metadataArray);
 
         $phpSetcookieSuccess = setrawcookie(
-            $name,
+            'og_auth',
             $value,
             [
                 'expires' => $expire,
