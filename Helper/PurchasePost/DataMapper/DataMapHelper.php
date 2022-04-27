@@ -43,7 +43,7 @@ class DataMapHelper
                 $product['product'] = $item->getProductId();
                 $product['sku'] = $item->getSku() ? $item->getSku() : $item->getProductId();
                 $parentItem = $item->getParentItem();
-                if ($parentItem['product_type'] !== 'bundle') {
+                if ($parentItem && $parentItem['product_type'] !== 'bundle') {
                     //Set amounts using parent item if this is a configurable product , using item if no parent.
                     //The below subtraction accounts for catalog price rules which don't have a discount amount explicit in the database
                     $discountAmount = $parentItem ? $parentItem->getBaseOriginalPrice() - $parentItem->getBasePrice() :
