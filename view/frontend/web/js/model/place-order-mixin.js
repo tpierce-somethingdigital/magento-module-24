@@ -22,6 +22,7 @@ define([
                             'og_optins': JSON.stringify(productIds)
                         }
                     }
+                    paymentData['additional_data']['customer_id'] = customerData.id;
                 }
             }
 
