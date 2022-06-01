@@ -3,13 +3,14 @@
 namespace Ordergroove\Subscription\Helper;
 
 use PayPal\Braintree\Model\Ui\ConfigProvider;
+use PayPal\Braintree\Model\Ui\PayPal\ConfigProvider as PayPalConfigProvider;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 class ConfigHelper
 {
-    const ALLOWED_GATEWAYS = [ConfigProvider::CODE];
+    const ALLOWED_GATEWAYS = [ConfigProvider::CODE, PayPalConfigProvider::PAYPAL_CODE];
     /**
      * @var ScopeConfigInterface
      */
