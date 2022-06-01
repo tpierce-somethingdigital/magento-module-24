@@ -82,18 +82,28 @@ class DataMap
 
         $ccExp = $this->dataMapHelper->getExpiration($payment, $websiteId);
 
-        if ($token && $ccExp) {
+        if ($token) {
             $map['payment'] = [
                 'token_id' => $token,
-                'cc_exp_date' => urlencode($ccExp),
-                'cc_type' => self::ORDERGROOVE_CARD_TYPE_MAP[$payment->getCcType()],
             ];
+
+            if ($payment->getCcType()) {
+                $map['payment']['cc_type'] = self::ORDERGROOVE_CARD_TYPE_MAP[$payment->getCcType()];
+                $map['payment']['payment_method'] = 'credit card';
+
+                if ($ccExp) {
+                    $map['payment']['cc_exp_date'] = urlencode($ccExp);
+                }
+            }
+            
+            // If PayPal is used set/reset the payment_method to paypal
+            if ($order->getPayment()->getMethod() == "braintree_paypal") {
+                $map['payment']['payment_method'] = 'paypal';
+            }
         }
 
         $allProducts = $this->dataMapHelper->getProducts($order);
-
         $map['products'] = $allProducts;
-
         return $map;
     }
 }
