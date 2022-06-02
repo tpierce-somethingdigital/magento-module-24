@@ -69,7 +69,7 @@ class BraintreeSearchHelper
         );
 
         $concatExpDate = $retrievedData['creditCard']['expirationMonth'] . '/' . $retrievedData['creditCard']['expirationYear'];
-        if ($creditCardData['orderCcType'] !== $retrievedData['creditCard']['cardType']) {
+        if (trim(strtolower($creditCardData['orderCcType'])) !== trim(strtolower($retrievedData['creditCard']['cardType']))) {
             throw new RecurringOrderException(__("Invalid Credit Card Type"), null, "100");
         }
 
