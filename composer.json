@@ -1,7 +1,7 @@
 {
     "name": "ordergroove/subscription",
     "description": "N/A",
-    "version": "1.3.6",
+    "version": "2.0.0",
     "require": {
         "php": "~7.1.3||~7.2.0||~7.3.0||~7.4.0",
         "paypal/module-braintree": "^4.1.0-p1"
