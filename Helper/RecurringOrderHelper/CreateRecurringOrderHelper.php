@@ -203,27 +203,32 @@ class CreateRecurringOrderHelper
     {
         $token = $tokenData['token'];
         $paymentMethod = $tokenData['method'];
-        $cardList = $this->paymentTokenManagement->getByGatewayToken($token, $paymentMethod, $customerId);
-
-        if (empty($cardList)) {
-            throw new RecurringOrderException(__("No default card on file"), null, "170");
+        $cardList = $this->paymentTokenManagement->getListByCustomerId($customerId);
+        $vaultedCard = null;
+        
+        foreach($cardList as $card) {
+            if($card['gateway_token'] == $token) {
+                $vaultedCard = $card;
+                break;
+            }
         }
 
-        if (!$cardList['is_active']) {
+        if (!$vaultedCard) {
+            throw new RecurringOrderException(__("Cannot find vaulted payment method which matches token id"), null, "170");
+        }
+
+        if (!$vaultedCard['is_active']) {
             $this->errorLogger->error("The given card is not active in customer account");
             throw new RecurringOrderException(__("The given card is not active in customer account"), null, "020");
         }
-
-        if (!($cardList['gateway_token'] === $token)) {
-            $this->errorLogger->error("Token $token does not match with store customer payment details.");
-            throw new RecurringOrderException(__("Token does not match with store customer payment details."), null, "999");
-        }
-
-        return [
+        
+        $validatedToken = [
             'token' => $token,
-            'public_hash' => $cardList['public_hash'],
-            'method' => $cardList['payment_method_code']
+            'public_hash' => $vaultedCard['public_hash'],
+            'method' => $vaultedCard['payment_method_code']
         ];
+        
+        return $validatedToken;
     }
 
     /**
