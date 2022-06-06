@@ -244,7 +244,11 @@ class CreateRecurringOrder
             ];
 
             $validateTokenData = $this->createRecurringOrderHelper->validateToken($parseTokenData, $customerInfo['customerId']);
-            $billingAddress = $this->braintreeSearchHelper->checkCreditCardValidity($ccData);
+            
+            // Credit card validity checks are only currently required for non-PayPal transactions
+            if($validateTokenData['method'] == 'braintree') {
+                $billingAddress = $this->braintreeSearchHelper->checkCreditCardValidity($ccData);
+            }
 
             $customer = $this->customerRepository->getById($customerInfo['customerId']);
 
