@@ -73,4 +73,15 @@ Ordergroove/Subscription will log various important information to log files loc
 
 ## Recurring Order (Order Placement)
 
+### Placement endpoint configuration
+
 Ordergroove should be configured to send recurring orders to <website_url>/ordergroove/subscription/placeorder
+
+### Enable Flat-rate shipping
+
+The recurring order placement code assumes that flat-rate shipping is enabled. You can enable this feature in Magento via Stores > Sales > Delivery Methods
+<img width="1317" alt="Screen Shot 2022-06-06 at 3 40 51 PM" src="https://user-images.githubusercontent.com/1692787/172235696-bbb0c926-a47d-4086-b0ef-f867b67470e3.png">
+
+
+
+
