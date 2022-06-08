@@ -361,7 +361,9 @@ class CreateRecurringOrder
 
             $shippingAddress->setCollectShippingRates(true)
                 ->collectShippingRates()
-                ->setShippingMethod('flatrate_flatrate');
+                ->setShippingMethod('flatrate_flatrate')
+                ->setShippingAmount(floatval($orderData['shipping']));
+            
             $quote->setPaymentMethod($validateTokenData['method']);
             $quote->setInventoryProcessed(false);
             $quote->setIsMultiShipping(0);
