@@ -244,7 +244,11 @@ class CreateRecurringOrder
             ];
 
             $validateTokenData = $this->createRecurringOrderHelper->validateToken($parseTokenData, $customerInfo['customerId']);
-            $billingAddress = $this->braintreeSearchHelper->checkCreditCardValidity($ccData);
+            
+            // Credit card validity checks are only currently required for non-PayPal transactions
+            if($validateTokenData['method'] == 'braintree') {
+                $billingAddress = $this->braintreeSearchHelper->checkCreditCardValidity($ccData);
+            }
 
             $customer = $this->customerRepository->getById($customerInfo['customerId']);
 
@@ -261,7 +265,13 @@ class CreateRecurringOrder
                     'postcode' => $data['customer']['customerShippingZip'],
                     'telephone' => $data['customer']['customerShippingPhone']
                 ],
-                'billing_address' => [
+                'shipping' => $data['head']['orderShipping'],
+                'orderSubtotalDiscount' => $data['head']['orderSubtotalDiscount']
+            ];
+            
+            // Non-PayPal vaulted credit cards require a billing address
+            if($validateTokenData['method'] == 'braintree') {
+                $orderData['billing_address'] = [
                     'firstname' => $billingAddress['firstName'],
                     'lastname' => $billingAddress['lastName'],
                     'street' => $billingAddress['streetAddress'],
@@ -270,10 +280,8 @@ class CreateRecurringOrder
                     'region' => $data['customer']['customerShippingState'],
                     'postcode' => $billingAddress['postalCode'],
                     'telephone' => $data['customer']['customerShippingPhone']
-                ],
-                'shipping' => $data['head']['orderShipping'],
-                'orderSubtotalDiscount' => $data['head']['orderSubtotalDiscount']
-            ];
+                ];
+            }
 
             $quote = $this->quoteFactory->create();
             $quote->assignCustomer($customer);
@@ -333,8 +341,13 @@ class CreateRecurringOrder
             }
 
             $this->cart->save();
+            
+            // Right now PayPal orders don't require a billing address so it might not be set
+            if(isset($orderData->billing_address)) {
+                $quote->getBillingAddress()->addData($orderData['billing_address']);
+            }
+            
             // Set Addresses to quote
-            $quote->getBillingAddress()->addData($orderData['billing_address']);
             $quote->getShippingAddress()->addData($orderData['shipping_address']);
 
             // Collect shipping rates, set Shipping & Payment Method
