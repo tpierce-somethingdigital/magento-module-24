@@ -317,7 +317,7 @@ class CreateRecurringOrder
                     } else {
                         $paramsObject = [
                             'qty' => $item['qty'],
-                            'custom_price' => $item['finalPrice']
+                            'custom_price' => $item['finalPrice'] / intval($item['qty'])
                         ];
                     }
                     $product = $this->productRepository->getById($productId, false, null, true);
@@ -424,7 +424,7 @@ class CreateRecurringOrder
             'bundle_option' => $getBundleOptions,
             'bundle_option_qty' => $getBundleOptionsQty,
             'qty' => intval($item['qty']),
-            'custom_price' => $item['finalPrice']
+            'custom_price' => $item['finalPrice'] / intval($item['qty'])
         ];
     }
 
@@ -452,7 +452,7 @@ class CreateRecurringOrder
         }
         return [
             'qty' => $item['qty'],
-            'custom_price' => $item['finalPrice']
+            'custom_price' => $item['finalPrice'] / intval($item['qty'])
         ];
     }
 
