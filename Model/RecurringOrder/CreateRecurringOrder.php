@@ -362,6 +362,7 @@ class CreateRecurringOrder
             $shippingAddress->setCollectShippingRates(true)
                 ->collectShippingRates()
                 ->setShippingMethod('flatrate_flatrate');
+            
             $quote->setPaymentMethod($validateTokenData['method']);
             $quote->setInventoryProcessed(false);
             $quote->setIsMultiShipping(0);
@@ -387,6 +388,7 @@ class CreateRecurringOrder
 
             $extraPaymentData = $this->createRecurringOrderHelper->createPaymentMethodNonce($validateTokenData, $customerInfo['customerId']);
             $quote->getPayment()->importData($extraPaymentData);
+            $quote->setTotalsCollectedFlag(false);
             $quote->collectTotals();
             $this->quoteRepository->save($quote);
             // Create Order From Quote
