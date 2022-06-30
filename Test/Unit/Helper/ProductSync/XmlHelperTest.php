@@ -57,7 +57,7 @@ class XmlHelperTest extends TestCase
      */
     private $scopeConfig;
 
-    protected function setUp() : void
+    protected function setUp()
     {
         $this->objectManager = new ObjectManager($this);
         $this->storeRepository = $this->getMockBuilder(StoreRepository::class)
@@ -109,7 +109,7 @@ class XmlHelperTest extends TestCase
         );
     }
 
-    protected function tearDown() : void
+    protected function tearDown()
     {
     }
 

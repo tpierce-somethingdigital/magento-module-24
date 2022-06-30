@@ -27,7 +27,7 @@ class DataAssignObserverTest extends TestCase
      * @var ObjectManager
      */
     private $objectManager;
-    protected function setUp() : void
+    protected function setUp()
     {
         $this->objectManager = new ObjectManager($this);
 

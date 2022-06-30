@@ -19,7 +19,7 @@ class SyncSelectTest extends TestCase
      */
     protected $timeZoneInterface;
 
-    protected function setUp() : void
+    protected function setUp()
     {
         $objectManager = new ObjectManager($this);
         $this->timeZoneInterface = $this->getMockBuilder(Timezone::class)
@@ -35,7 +35,7 @@ class SyncSelectTest extends TestCase
         );
     }
 
-    protected function tearDown() : void
+    protected function tearDown()
     {
     }
 

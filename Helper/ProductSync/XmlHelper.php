@@ -22,28 +22,6 @@ use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\EntityManager\MetadataPool;
 
-
-class SimpleXMLElementExtended extends \SimpleXMLElement {
-
-    /**
-     * https://stackoverflow.com/a/20511976
-     * Adds a child with $value inside CDATA
-     * @param unknown $name
-     * @param unknown $value
-     */
-    public function addChildWithCDATA($name, $value = NULL) {
-      $new_child = $this->addChild($name);
-  
-      if ($new_child !== NULL) {
-        $node = dom_import_simplexml($new_child);
-        $no   = $node->ownerDocument;
-        $node->appendChild($no->createCDATASection($value));
-      }
-  
-      return $new_child;
-    }
-  }
-
 /**
  * Class XmlHelper
  * @package Ordergroove\Subscription\Helper\ProductSync
@@ -196,7 +174,7 @@ class XmlHelper
         $linkField = $metadata->getLinkField();
         try {
             $this->logger->info("In createWebsiteProductsXml for: ".$websiteId);
-            $this->xml = new SimpleXMLElementExtended('<products/>');
+            $this->xml = new \SimpleXMLElement('<products/>');
             $collection = $this->productFactory->create()->getCollection();
 
             $entityType = $collection->getEntity()->getType();
@@ -295,7 +273,7 @@ class XmlHelper
             return;
         }
         $productXml = $this->xml->addChild('product');
-        $productXml->addChildWithCDATA('name', str_replace($symbols["search"], $symbols["replace"], $productData['name']));
+        $productXml->addChild('name', str_replace($symbols["search"], $symbols["replace"], $productData['name']));
         $productXml->addChild('product_id', $productData['entity_id']);
         $productXml->addChild('sku', $productData['sku']);
         $productXml->addChild('price', $productData['price']);

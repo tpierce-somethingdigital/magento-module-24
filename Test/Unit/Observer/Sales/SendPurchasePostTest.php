@@ -63,7 +63,7 @@ class SendPurchasePostTest extends Testcase
      * setUp
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp()
     {
         $this->objectManager = new ObjectManager($this);
 

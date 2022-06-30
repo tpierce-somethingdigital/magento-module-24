@@ -32,7 +32,7 @@ class CheckConnectionTest extends TestCase
      */
     protected $layout;
 
-    protected function setUp() : void
+    protected function setUp()
     {
         $objectManager = new ObjectManager($this);
         $this->objectManagerMock = $this->createMock(\Magento\Framework\ObjectManager\ObjectManager::class);
@@ -52,7 +52,7 @@ class CheckConnectionTest extends TestCase
         );
     }
 
-    protected function tearDown() : void
+    protected function tearDown()
     {
     }
 
