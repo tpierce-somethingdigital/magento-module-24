@@ -83,7 +83,7 @@ class CreateRecurringOrderTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
         $this->product = $this->getMockBuilder(Product::class)
