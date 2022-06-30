@@ -60,7 +60,7 @@ class IndexTest extends TestCase
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp()
     {
         $this->objectManagerMock = $this->createMock(\Magento\Framework\ObjectManager\ObjectManager::class);
         $this->request = $this->createMock(\Magento\Framework\App\Request\Http::class);

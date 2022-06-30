@@ -44,7 +44,7 @@ class GetProductDataTest extends TestCase
      * setUp
      * @return void
      */
-    public function setUp() : void
+    public function setUp()
     {
         $this->objectManager = new ObjectManager($this);
         $this->registry = $this->createPartialMock(Registry::class, ['registry']);

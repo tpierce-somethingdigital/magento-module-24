@@ -17,12 +17,5 @@
         "psr-4": {
             "Ordergroove\\Subscription\\": ""
         }
-    },
-    "repositories": [{
-        "type": "composer",
-        "url": "https://repo.magento.com/"
-    }],
-    "require-dev": {
-        "phpunit/phpunit": "9.5.x-dev"
     }
 }

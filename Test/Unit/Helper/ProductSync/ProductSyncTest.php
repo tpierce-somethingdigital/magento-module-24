@@ -29,7 +29,7 @@ class ProductSyncTest extends TestCase
      * @var ObjectManager
      */
     protected $objectManager;
-    protected function setUp() : void
+    protected function setUp()
     {
         $this->objectManager = new ObjectManager($this);
         $this->productSync = $this->objectManager->getObject(ProductSync::class);
@@ -50,7 +50,7 @@ class ProductSyncTest extends TestCase
         );
     }
 
-    protected function tearDown() : void
+    protected function tearDown()
     {
     }
 
