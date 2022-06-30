@@ -134,7 +134,7 @@ class ChangeInTelephoneTest extends TestCase
      * setUp
      * @return void
      */
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
         $this->customerSession = $this->getMockBuilder(Session::class)

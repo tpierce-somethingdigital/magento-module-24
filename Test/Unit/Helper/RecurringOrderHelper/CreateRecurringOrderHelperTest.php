@@ -69,7 +69,7 @@ class CreateRecurringOrderHelperTest extends TestCase
     /**
      * Constructor
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
 

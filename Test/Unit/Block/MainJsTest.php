@@ -34,7 +34,7 @@ class MainJsTest extends TestCase
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
 
@@ -58,7 +58,7 @@ class MainJsTest extends TestCase
     /**
      * @return void
      */
-    public function testGetMainJsUrl()
+    public function testGetMainJsUrl() : void
     {
         $this->urlBuilder->expects($this->once())->method("getPublicIdUrl")->willReturn("https://test.com");
         $this->assertEquals("https://test.com", $this->mainJs->getMainJsUrl());

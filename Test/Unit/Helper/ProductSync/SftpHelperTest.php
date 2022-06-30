@@ -43,7 +43,7 @@ class SftpHelperTest extends TestCase
      */
     protected $infoLogger;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
 
@@ -74,7 +74,7 @@ class SftpHelperTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
     }
 

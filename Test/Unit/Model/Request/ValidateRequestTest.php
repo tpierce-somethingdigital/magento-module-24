@@ -31,7 +31,7 @@ class ValidateRequestTest extends TestCase
     /**
      * Set Up
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
         $this->request = $this->getMockBuilder(Http::class)

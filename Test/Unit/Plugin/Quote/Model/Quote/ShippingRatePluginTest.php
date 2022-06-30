@@ -23,7 +23,7 @@ class ShippingRatePluginTest extends TestCase
      * setUp
      * @return void
      */
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->objectManager = new ObjectManager($this);
 
