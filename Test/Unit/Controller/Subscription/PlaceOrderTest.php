@@ -84,7 +84,7 @@ class PlaceOrderTest extends TestCase
      */
     protected $request;
 
-    public function setUp()
+    public function setUp() : void
     {
         $objectManager = new ObjectManager($this);
         $this->context = $this->createMock(Context::class);
