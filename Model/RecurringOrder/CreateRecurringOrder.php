@@ -321,7 +321,11 @@ class CreateRecurringOrder
                         ];
                     }
                     $product = $this->productRepository->getById($productId, false, null, true);
-                    $quote->addProduct($product, new DataObject($paramsObject));
+                    $response = $quote->addProduct($product, new DataObject($paramsObject));
+
+                    if (is_string($response)) {
+                        throw new RecurringOrderException(__("Unexpected response when trying to add product to the cart: ".$response), null, "020");
+                    }
                 }
             } else {
                 $stockId = null;
@@ -336,7 +340,11 @@ class CreateRecurringOrder
                         $paramsObject = $this->addSimpleAndConfigurableToCart($productId, $item, $stockId, $websiteId);
                     }
                     $product = $this->productRepository->getById($productId, false, null, true);
-                    $quote->addProduct($product, new DataObject($paramsObject));
+                    $response = $quote->addProduct($product, new DataObject($paramsObject));
+
+                    if (is_string($response)) {
+                        throw new RecurringOrderException(__("Unexpected response when trying to add product to the cart: ".$response), null, "020");
+                    }
                 }
             }
 
