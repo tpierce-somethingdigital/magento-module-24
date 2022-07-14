@@ -2,7 +2,7 @@
 
 namespace Ordergroove\Subscription\Model\Carrier;
 
-class Flatrate{
+class DisableFlatratePlugin{
 
     protected $_checkoutSession;
     protected $_scopeConfig;
