@@ -1,8 +1,9 @@
 define([
     'jquery',
     'jquery/jquery.cookie',
+    'Magento_Checkout/js/action/get-totals',
     'Magento_Customer/js/customer-data'
-], function ($, cookie, customerData) {
+], function ($, cookie, getCartTotals, customerData) {
     $(document).ready(function ($) {
         $(document).on('click', 'og-optin-button', function (e) {
             e.preventDefault();
@@ -14,7 +15,12 @@ define([
                     return false;
                 } else {
                     var sections = ['cart'];
+                    var deferred = $.Deferred();
+                    
                     customerData.reload(sections, true);
+                    if (e.target.closest("og-offer").getAttribute("location") === "cart") {
+                        getCartTotals([], deferred);
+                    }
                 }
             }
         });
@@ -25,7 +31,12 @@ define([
             $.cookie('product_subscribed_' + unsubscribedProduct, false);
             if (window.location.href.indexOf("checkout") > -1) {
                 var sections = ['cart'];
+                var deferred = $.Deferred();
+                
                 customerData.reload(sections, true);
+                if (e.target.closest("og-offer").getAttribute("location") === "cart") {
+                    getCartTotals([], deferred);
+                }
             }
         });
     });
