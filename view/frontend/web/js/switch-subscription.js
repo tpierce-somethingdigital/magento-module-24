@@ -18,7 +18,9 @@ define([
                     var deferred = $.Deferred();
                     
                     customerData.reload(sections, true);
-                    getCartTotals([], deferred);
+                    if (e.target.closest("og-offer").getAttribute("location") === "cart") {
+                        getCartTotals([], deferred);
+                    }
                 }
             }
         });
@@ -31,8 +33,10 @@ define([
                 var sections = ['cart'];
                 var deferred = $.Deferred();
                 
-                customerData.reload(sections, true);                
-                getCartTotals([], deferred);
+                customerData.reload(sections, true);
+                if (e.target.closest("og-offer").getAttribute("location") === "cart") {
+                    getCartTotals([], deferred);
+                }
             }
         });
     });
