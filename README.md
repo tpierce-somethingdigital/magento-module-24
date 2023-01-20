@@ -5,7 +5,6 @@ This repository contains a Magento 2 extension which serves as a middleware with
 - Compatibility Magento 2.4
     - Adobe Open Source: 2.4.3-p1
     - Adobe Commerce: 2.4.3-p1
-    - Use Branches master-24 and develop-24
     - Stable Version -> Latest 1.3.X
 
 # Installation Instructions
