@@ -1,6 +1,6 @@
 # Overview 
 
-This repository contains a Magento 2 extension which serves as a middleware with Ordergroove's subscription service.
+This repository contains a Magento 2 sample code extension which would serve as a middleware with Ordergroove's subscription service.
 
 - Compatibility Magento 2.4
     - Adobe Open Source: 2.4.3-p1
