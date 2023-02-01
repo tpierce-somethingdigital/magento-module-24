@@ -7,6 +7,21 @@ This repository contains a Magento 2 sample code extension which would serve as 
     - Adobe Commerce: 2.4.3-p1
     - Stable Version -> Latest 1.3.X
     - Braintree payment gateway for Credit Card and PayPal payment methods
+    
+# Currently Known Issues and Limitations
+
+#### Please note that due to the flexible nature of Magento, it might be possible that other overrides may interfere with this sample code. Please work with your Ordergroove representative to conduct thorough testing as you're going through the integration process.
+
+- This sample code was built with a Braintree payment gateway in mind. If you are using another gateway then code customization is required to store/retrieve vaulted payment methods.
+- Credit Cards and PayPal are currently the only supported payment methods. If you want to support additional payment methods then a modification to this code is required to add support or hide alternative payment methods for customers who choose to check out with a subscription in their cart.
+- Multi-site support is limited to powering the customer's ability to check out with a subscription and managing their previously created subscriptions in the customer's account section. The sample code does not currently provide full support for placing recurring orders and ingesting the Magento product catalog (aka the product feed)
+- This sample code currently relies upon a flat shipping rate being setup in Magento in order to apply a shipping cost for all recurring orders. Because of this, the code hides this flat rate shipping option during standard checkout. If you are explicitly using flat-rate shipping and offering it as an option to your customers, you will have to change the code so that your customers can continue to choose flat rate shipping during checkout.
+- This sample code does not have support for customer/payment updates. If your current Magento site provides a way for customers to update their personal details or payment method you can send these updates to Ordergroove using our customer/payment updated APIs
+- Sometimes it's very difficult to troubleshoot an environment specific issue, for this purpose we added some logging and by default the logs can be found in the `/var/log/ordergroove` directory. Ordergroove does not have direct access to these logs so sometimes we may require that you send these to us.
+- The cron job which is responsible for sending Ordergroove the product feed can skip firing and the product updates may stop making their way into Ordergroove. This is usually related to the default cron schedule attempting to schedule an execution for a time during which the cron won't actually run for the job. If you run into this issue, please contact Ordergroove or take a look at the cron_groups setup for "ordergroove" and adjust it based on your needs.
+
+If you run into an issue which is not listed here, please don't hesitate to add it to the github issues list: https://github.com/ordergroove/magento-module-24/issues
+
 
 # Installation Instructions
 
